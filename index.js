@@ -110,7 +110,7 @@ var Muffin = (options) => {
 			if ( checkRollbar(options) ) { 
 				let rollbar = new Rollbar(options.rollbar.token);
 				if ( Array.isArray(options.rollbar.evn) ) {
-					if( options.rollbar.evn.indexOf(process.evn) < 0 ) {
+					if( options.rollbar.evn.indexOf(process.evn) >= 0 ) {
 						rollbar.error(obj);
 					} 
 				} else {
