@@ -33,27 +33,27 @@ const now = () => {
 };
 
 
-/** Function to validate options
+/** Function to validate configuration
 */
-const constructOptions = (options) => { 
-	options = typeof options == 'object' ? options : {};
+const constructConfiguration = (configuration) => { 
+	configuration = typeof configuration == 'object' ? configuration : {};
 	for(var key in DEFAULT_CONFIG) {
-		if (options[key] == undefined || options[key] == null) {
-			options[key] = DEFAULT_CONFIG[key];
+		if (configuration[key] == undefined || configuration[key] == null) {
+			configuration[key] = DEFAULT_CONFIG[key];
 		}
 	}
-	options.log_object = ['datetime', 'ip', 'ips'];
-	return options;
+	configuration.log_object = ['datetime', 'ip', 'ips'];
+	return configuration;
 };
 
 
 /** Function to check rollbar
 */
-const checkRollbar = (options) => {
-	if (!options.rollbar) {
+const checkRollbar = (configuration) => {
+	if (!configuration.rollbar) {
 		return false;
 	}
-	if (!options.rollbar.token) {
+	if (!configuration.rollbar.token) {
 		return false;
 	}
 	return true;
@@ -64,9 +64,12 @@ const checkRollbar = (options) => {
 */
 var MuffinLogger = function() {
 
-	this.configuration 		= DEFAULT_CONFIG
+	this.configuration 		= DEFAULT_CONFIG;
 
-	this.setConfiguration 	= constructOptions
+	this.setConfiguration 	= function(configuration) { 
+		this.configuration = constructConfiguration(configuration);
+		this.initDir();
+	}
 
 
 	/** Function to init directories 
@@ -111,9 +114,9 @@ var MuffinLogger = function() {
 	};
 
 
-	/**	Middlewear function
+	/**	Middleware function
 	*/
-	this.middlewear  		= (req, res, next) => { 
+	this.middleware  		= (req, res, next) => { 
 
 		let log = { datetime: now(), ip: req.ip, ips: req.ips };
 
