@@ -1,28 +1,38 @@
-var Assert 		= require('assert');  
-var behavior 	= require('../behavior.js'); 
+const chai 		= require('chai');
+const assert 	= chai.assert;
+const should 	= chai.should();
+const expect 	= chai.expect;
+const Assert 	= require('assert');
 
 
+const behavior 	= require('../behavior.js'); 
 
-describe('behavior', () => {  
 
-	describe('behavior1', () => {
-		it('returns "HELLO WORLD"', () => {
-			return Assert.equal(behavior.behavior1(), 'HELLO WORLD');
+describe('==> behavior', () => {  
+
+	describe('==> setConfiguration', () => {
+		it('returns object', () => { 
+			var options = {};
+			behavior.setConfiguration(options).should.be.a('object');
 		});
 	});
 
-	describe('behavior2', () => {
-
-		it('returns "foo" when passed "FOO"', () => {
-			return Assert.equal(behavior.behavior2('FOO'), 'foo');
-		});
-
-		it('returns "bar" when passed "BAR"', () => {
-			return Assert.equal(behavior.behavior2('BAR'), 'bar');
-		});
-
-		it('returns "hello world" when passed "HELLO WORLD"', () => {
-			return Assert.equal(behavior.behavior2('HELLO WORLD'), 'hello world');
+	describe('==> checkServerLogFolder', () => {
+		it('returns true', () => { 
+			return Assert.equal(behavior.checkIfServerLogFolderExists(), true);
 		});
 	});
+
+	describe('==> checkDefaultLogFolder', () => {
+		it('returns true', () => { 
+			return Assert.equal(behavior.checkIfDefaultLogFolderExists(), true);
+		});
+	});
+
+	describe('==> checkErrorLogFolder', () => {
+		it('returns true', () => { 
+			return Assert.equal(behavior.checkIfDefaultErrorFolderExists(), true);
+		});
+	});
+	
 });

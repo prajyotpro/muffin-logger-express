@@ -4,12 +4,11 @@ const app 		= express();
 
 const PORT 		= 3030;
 
-// const muffin = require('./index')();
-const muffin = require('./index')({
-	fields:['ip']});
+
+const Muffin = require('./index');
 
 
-app.use(muffin);
+app.use(Muffin.middlewear);
 
 
 app.get('/', (req, res) => { 
@@ -19,14 +18,14 @@ app.get('/', (req, res) => {
 
 app.get('/error', (req, res) => {
 	req.error("Error log ...");
-	res.send("Logged error");
+	res.send("Logged error!");
 });
 
 
 app.get('/log', (req, res) => {
 	req.log("Just a normal log ... ");
-	res.send("Logged error");
+	res.send("Logged print!");
 });
 
 
-app.listen(PORT, () => console.log('Example app listening on port %d!', PORT));
+app.listen(PORT, () => console.log('Muffin logger listening on port %d!', PORT));

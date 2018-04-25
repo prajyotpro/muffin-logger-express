@@ -1,38 +1,34 @@
-/*
-module.exports = { 
+var logger 		= require('./index.js'); 
 
-	behavior1: function() {  
-		return 'HELLO WORLD';
-	}, 
 
-	behavior2: function(responseString) {  
-		return responseString.toLowerCase();
-	}
-}
-*/
 const express 	= require('express');
-var logger 		= require('./index.js')(); 
+const fs 		= require('fs');
 
-const app 		= express();
-app.use(logger);
-
-// console.log(app);
 
 
 module.exports = { 
 
-	behavior1: function() {  
-
-		app.get((req, res) => { 
-
-			console.log("hello");
-			res.send("Hello World!");
-		});
-
-		// return 'HELLO WORLD';
+	setConfiguration: function(config) { 
+		config = logger.setConfiguration(config);
+		return config;
 	}, 
+
+	checkIfServerLogFolderExists: function() {
+		logger.initDir();
+		return fs.existsSync(logger.configuration.server_log_folder)
+	},
+
+	checkIfDefaultLogFolderExists: function() {
+		logger.initDir();
+		return fs.existsSync(logger.configuration.default_log_folder)
+	},
+
+	checkIfDefaultErrorFolderExists: function() {
+		logger.initDir();
+		return fs.existsSync(logger.configuration.error_log_folder)
+	},
 	 
-	behavior2: function(responseString) {  
-		return responseString.toLowerCase();
+	logDefault: function(obj) {  
+		return logger.logDefault(obj);
 	}
 }
