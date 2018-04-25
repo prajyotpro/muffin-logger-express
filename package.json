@@ -1,0 +1,20 @@
+{
+  "name": "muffin-logger-express",
+  "version": "1.0.0",
+  "description": "Advance logger for node applications.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Prajyot Khandeparkar",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.1.0",
+    "request": "^2.85.0"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "rollbar": "^2.3.9"
+  }
+}
