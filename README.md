@@ -65,9 +65,9 @@ app.get('/log', (req, res) => {
 ``` javascript
 const Muffin = require('muffin-logger-express');
 Muffin.setConfiguration({
-	error_log_folder	: __dirname + '/log/', 
-	server_log_folder	: __dirname + '/log/', 
-	default_log_folder	: __dirname + '/log/', 
+	error_log_folder	: path.resolve('./') + '/log/', 
+	server_log_folder	: path.resolve('./') + '/log/',  
+	default_log_folder	: path.resolve('./') + '/log/', 
 	fields				: ['ip', 'ips', 'method', 'path', 'query', 'params', 'body'] // Fields to be printed in server request log
 });
 app.use(Muffin.middleware); // express application
@@ -92,7 +92,7 @@ app.use(Muffin.middleware); // express application
  By default- default logs (print statements) will be logged on non production environment. 
 To make it log on production environment you will need to set log priority parameter.
 If log priority is more then 0 then it will be logged on all environment.
-req.log(<object>, <priority>);
+req.log(< object >, < priority >);
  
  ``` javascript
 app.get('/log', (req, res) => {

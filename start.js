@@ -1,6 +1,6 @@
 const express 	= require('express');
 const app 		= express();
-
+const path 		= require('path');
 
 const PORT 		= 3030;
 
@@ -9,9 +9,9 @@ const Muffin = require('./index');
 
 /*
 Muffin.setConfiguration({
-	error_log_folder	: __dirname + '/log/', 
-	server_log_folder	: __dirname + '/log/', 
-	default_log_folder	: __dirname + '/log/', 
+	error_log_folder	: path.resolve('./') + '/log/', 
+	server_log_folder	: path.resolve('./') + '/log/', 
+	default_log_folder	: path.resolve('./') + '/log/', 
 	fields				: ['ip', 'ips', 'method', 'path', 'query', 'params', 'body'], 
 	rollbar				: {
 	}
