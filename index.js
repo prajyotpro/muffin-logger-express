@@ -4,13 +4,14 @@
 /**	Dependencies */
 const fs 		= require('fs');
 const Rollbar	= require('rollbar');
+const path 		= require('path');
 
 
 /** Constants */
 const DEFAULT_CONFIG = { 
-	error_log_folder	: __dirname + '/error-log/', 
-	server_log_folder	: __dirname + '/server-log/', 
-	default_log_folder	: __dirname + '/default-log/', 
+	error_log_folder	: path.resolve('./') + '/error-log/', 
+	server_log_folder	: path.resolve('./') + '/server-log/', 
+	default_log_folder	: path.resolve('./') + '/default-log/', 
 	fields				: ['ip', 'ips', 'method', 'path', 'query', 'params', 'body']
 };
 
@@ -147,7 +148,10 @@ var MuffinLogger = function() {
 		req.log 	= logDefault;
 		req.error 	= logError;
 		next();
-	};
+	}
+
+	// Create directories
+	this.initDir()
 }
 
 
